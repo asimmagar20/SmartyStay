@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hotel_backend.settings')
     from django.core.management import execute_from_command_line

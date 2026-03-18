@@ -61,8 +61,12 @@ WSGI_APPLICATION = 'hotel_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'smartstay_db',
+        'USER': 'root',
+        'PASSWORD': '??m@g@r@$!m20??',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

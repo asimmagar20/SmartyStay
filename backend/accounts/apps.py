@@ -20,9 +20,14 @@ def seed_nepal_data(sender, **kwargs):
 
     # Admin
     User.objects.get_or_create(
-        username="admin",
-        defaults={"role": "admin", "is_staff": True, "is_superuser": True},
-    )
+    username="admin",
+    defaults={
+        "role": "admin",
+        "is_staff": True,
+        "is_superuser": True,
+        "email": "admin@example.com"
+    },
+)
     admin_user = User.objects.get(username="admin")
     if not admin_user.is_superuser:
         admin_user.is_staff = True
@@ -31,16 +36,19 @@ def seed_nepal_data(sender, **kwargs):
         admin_user.set_password("admin123")
         admin_user.save()
     else:
-        # ensure password exists (fresh dev)
+
         if not admin_user.check_password("admin123"):
             admin_user.set_password("admin123")
             admin_user.save()
 
     # Customer
     User.objects.get_or_create(
-        username="customer",
-        defaults={"role": "customer"},
-    )
+    username="customer",
+    defaults={
+        "role": "customer",
+        "email": "customer@example.com"
+    },
+)
     customer_user = User.objects.get(username="customer")
     if not customer_user.check_password("customer123"):
         customer_user.role = "customer"
