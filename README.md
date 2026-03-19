@@ -61,7 +61,7 @@ This project solves these problems by creating a centralized digital system.
 - SimpleJWT (JWT Authentication)
 - Jazzmin (Enhanced Admin Panel)
 - Pillow (Image Upload Support)
-- SQLite Database (Development)
+- MySQL Database (Development)
 
 ---
 
