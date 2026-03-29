@@ -5,15 +5,16 @@ export default function GlassSelect({ options, value, onChange }) {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState(null);
   const buttonRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
-    const handleClick = (e) => {
-      if (buttonRef.current && !buttonRef.current.contains(e.target)) {
-        setOpen(false);
-      }
+    const handlePointerDown = (e) => {
+      const inTrigger = buttonRef.current?.contains(e.target);
+      const inMenu = menuRef.current?.contains(e.target);
+      if (!inTrigger && !inMenu) setOpen(false);
     };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
   }, []);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function GlassSelect({ options, value, onChange }) {
         position &&
         createPortal(
           <div
+            ref={menuRef}
             style={{
               position: "absolute",
               top: position.top,

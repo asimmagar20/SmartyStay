@@ -15,8 +15,6 @@ import { useAuth } from "../../context/AuthContext";
 import BookingForm from "../customer/BookingForm";
 import { formatNPR, formatUSD } from "../../utils/currency";
 
-const BACKEND_URL = "https://intrinsically-nonperjured-kyoko.ngrok-free.dev";
-
 const fallbackImage =
   "https://images.unsplash.com/photo-1560067174-8943bd8f7421?auto=format&fit=crop&w=1600&q=80";
 
@@ -61,9 +59,7 @@ const RoomDetail = () => {
   }
 
   const imageUrl =
-    room.final_image || room.image
-      ? `${BACKEND_URL}${room.final_image || room.image}`
-      : fallbackImage;
+    room.final_image || room.image_url || room.image || fallbackImage;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
@@ -87,7 +83,10 @@ const RoomDetail = () => {
               src={imageUrl}
               alt={room.name}
               loading="lazy"
-              onError={(e) => (e.target.src = fallbackImage)}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = fallbackImage;
+              }}
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
             />
           </div>
